@@ -81,6 +81,7 @@ def Concate(L1,L2):
 
 #------------------------------------------------------------------------------
 #BUBBLE SORT ALGORITHM
+#O(n^2) runtime
 def bubble_Sort(L):
     change = True
     while change:
@@ -96,7 +97,8 @@ def bubble_Sort(L):
             
             
 #------------------------------------------------------------------------------            
-#MERGE SORT ALGORITHM   
+#MERGE SORT ALGORITHM  
+#O(n log(n)) runtime
 def merge_Sort(L):
     #n log n runtime
     if L == None or L.next == None:
@@ -146,6 +148,7 @@ def sorted_Merge(leftSide, rightSide):
 
 #------------------------------------------------------------------------------
 #QUICK SORT ALGORITM
+#O(n log(n)) runtime
 def quick_Sort(L):
     if IsEmpty(L):
         return L
