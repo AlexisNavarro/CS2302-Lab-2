@@ -3,6 +3,8 @@
 Created on Thu Feb 21 12:26:02 2019
 
 @author: Alexis
+#CS 2302 
+#Purpose: By using Linked Lists I needed to implement various sortings in order to show my abilities with using sorting and recursion in liked lists
 """
 import random
 
