@@ -147,12 +147,13 @@ def sorted_Merge(leftSide, rightSide):
 def quick_Sort(L):
     if IsEmpty(L):
         return L
-    
-    piv = L.head.item # the Pivot points at the first value this time but can be changed on where to point, but will require to change the temp also
-    temp = L.head.next
     #needed the empty lists to get the leftSide of the Pivot and the Right Side of the Pivot
     leftSide = List()
     rightSide = List()
+    
+    
+    piv = L.head.item # the Pivot points at the first value this time but can be changed on where to point, but will require to change the temp also
+    temp = L.head.next
     
     while temp!=None:
         if piv > temp.item:#compare the items of the temp linked list to the first value of the pivot and adds the specific values to either the left or right side lists
