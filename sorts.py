@@ -155,7 +155,7 @@ def quick_Sort(L):
     rightSide = List()
     
     while temp!=None:
-        if temp.item < piv:#compare the items of the temp linked list to the first value of the pivot and adds the specific values to either the left or right side lists
+        if piv > temp.item:#compare the items of the temp linked list to the first value of the pivot and adds the specific values to either the left or right side lists
             Append(leftSide,temp.item)# add the new values to the leftside of the list
             temp = temp.next
         else:
