@@ -66,6 +66,7 @@ def IsSorted(L):
             print('not sorted')
             return False
     return True
+
 def Concate(L1,L2):
     if IsEmpty(L1):
         return L2
@@ -96,33 +97,34 @@ def bubble_Sort(L):
 #MERGE SORT ALGORITHM   
 def merge_Sort(L):
     #n log n runtime
-    count=0
     if L == None or L.next == None:
         return L
     
-    middle = split(L)
-    nextMiddle = middle.next
+    middle = split(L) #Split  the list by the middle position
+    nextMiddle = middle.next# to declare the position after the middle, in order for the right side of the list to be stored
     
     middle.next = None
-    left = merge_Sort(L)
-    right = merge_Sort(nextMiddle)
     
-    sortedList= sorted_Merge(left, right, count)
+    left = merge_Sort(L) #merge_sort is used recursively to create the left side of the list
+    
+    right = merge_Sort(nextMiddle) # the right is declared everything after the middle of the original list
+    
+    sortedList= sorted_Merge(left, right)# Merge both the lists on its own specific merge
     return sortedList
 
 
 def split(L):
     fast = L.next
     slow = L
-    while fast != None:
-        fast = fast.next
+    while fast != None: # moves fast by two 
+        fast = fast.nexts 
         if fast != None:
-            slow = slow.next
+            slow = slow.next#moves slow by one until it gets to the middle position
             fast = fast.next
     return slow
     
     
-def sorted_Merge(leftSide, rightSide, count):
+def sorted_Merge(leftSide, rightSide):
    Result = None
    if leftSide == None:
        return rightSide
@@ -130,48 +132,48 @@ def sorted_Merge(leftSide, rightSide, count):
    if rightSide == None:
        return leftSide
    
-   if leftSide.item <= rightSide.item:
+   if leftSide.item <= rightSide.item:# compares the values of the left and right side
        Result = leftSide
-       Result.next = sorted_Merge(leftSide.next, rightSide, count+1)
+       Result.next = sorted_Merge(leftSide.next, rightSide)
    else:
        Result = rightSide
-       Result.next = sorted_Merge(leftSide, rightSide.next, count +1)
+       Result.next = sorted_Merge(leftSide, rightSide.next)
 
-   return Result
+   return Result #returns a merge sort list
 
 
 #------------------------------------------------------------------------------
-
 #QUICK SORT ALGORITM
 def quick_Sort(L):
     if IsEmpty(L):
         return L
     
-    piv = L.head.item
+    piv = L.head.item # the Pivot points at the first value this time but can be changed on where to point, but will require to change the temp also
     temp = L.head.next
+    #needed the empty lists to get the leftSide of the Pivot and the Right Side of the Pivot
     leftSide = List()
     rightSide = List()
     
     while temp!=None:
-        if temp.item < piv:
-            Append(leftSide,temp.item)
+        if temp.item < piv:#compare the items of the temp linked list to the first value of the pivot and adds the specific values to either the left or right side lists
+            Append(leftSide,temp.item)# add the new values to the leftside of the list
             temp = temp.next
         else:
             Append(rightSide,temp.item)
             temp = temp.next
             
-    newLeft = quick_Sort(leftSide)
+    newLeft = quick_Sort(leftSide) # recurse the method again in order to sort until everything is in order
     newRight = quick_Sort(rightSide)
     
     Append(newLeft,piv)
     
-    return Concate(newLeft,newRight)
+    return Concate(newLeft,newRight) # merge both left and right to create a new sorted list. Can't use the same merge as sorted_Merge
         
     
     
     
 #------------------------------------------------------------------------------  
-def GetLength(L):
+def GetLength(L): # finds the length of the list
     temp = L.head
     count = 0
     while temp is not None:
@@ -180,7 +182,7 @@ def GetLength(L):
     return count
            
 
-def ElementAt(L, mid):
+def ElementAt(L, mid): # gives the element of the list where the middle is positioned at
     current = L.head 
     count = 0 
   
@@ -192,8 +194,8 @@ def ElementAt(L, mid):
     return 0; 
         
     
-def Median(L):
-    C = copy(L)
+def Median(L):# method to find the middle value of the list
+    C = copy(L) # creates a copy to make sure to not affect the original list
     element= ElementAt(C,GetLength(C)//2)
     print('Sorted Value of middle element is %d' %element)
 
@@ -202,7 +204,7 @@ def Median(L):
 # MAIN
 L = List()
 print(IsEmpty(L))
-for i in range(5):
+for i in range(5): # creates a list by using a random generator and can be edited to increase the size of the list and range of numbers
    t = random.randint(1,5)
    Append(L,t)
 
