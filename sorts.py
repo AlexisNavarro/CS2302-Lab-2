@@ -121,7 +121,7 @@ def split(L):
     fast = L.next
     slow = L
     while fast != None: # moves fast by two 
-        fast = fast.nexts 
+        fast = fast.next
         if fast != None:
             slow = slow.next#moves slow by one until it gets to the middle position
             fast = fast.next
@@ -178,6 +178,43 @@ def quick_Sort(L):
     
     
     
+#------------------------------------------------------------------------------ 
+#Modified Quick sort
+
+def modified_quickSort(L, n):
+    if IsEmpty(L):
+        return L
+    Print(L)
+    left_Side = List()
+    right_Side= List()
+    piv = L.head.item
+    temp = L.head.next
+    
+    while temp is not None:
+        if piv>temp.item:
+            Append(left_Side,temp.item)
+            temp = temp.next
+        else:
+            
+            Append(right_Side,temp.item)
+            temp = temp.next
+            
+    #to get big O
+    #if my n is the pivot
+    if n== GetLength(left_Side):
+        return piv
+    
+    #if my n is in the left side of my list
+    elif n >= GetLength(left_Side):
+        #n = n - GetLength(left_Side)-1
+        return modified_quickSort(right_Side, n)
+    
+    #if my n is in the right side of my list
+    elif n <= GetLength(left_Side):
+        return modified_quickSort(left_Side,n)
+    
+    
+    
 #------------------------------------------------------------------------------  
 def GetLength(L): # finds the length of the list
     temp = L.head
@@ -204,25 +241,33 @@ def Median(L):# method to find the middle value of the list
     C = copy(L) # creates a copy to make sure to not affect the original list
     element= ElementAt(C,GetLength(C)//2)
     print('Sorted Value of middle element is %d' %element)
+    
+def Median2(L):
+    C = copy(L)
+    element= modified_quickSort(C,GetLength(C)//2)
+    print('Sorted Value of middle element is ', element)
+    return C
 
 
 #------------------------------------------------------------------------------
 # MAIN
 L = List()
-print(IsEmpty(L))
-for i in range(5): # creates a list by using a random generator and can be edited to increase the size of the list and range of numbers
+#print(IsEmpty(L))
+for i in range(5):
    t = random.randint(1,5)
    Append(L,t)
 
 #leftSide= List()  tried to make them global variables for merge and quick sort
 #rightSide= List()
-Print(L)
+#Print(L)
 
 #UNCOMMENT TO TEST THE SORTINGS
 
 #bubble_Sort(L)
 #L.head=merge_Sort(L.head)
 #L=quick_Sort(L)
-Median(L)
+#Median(L)
+#Print(L)
 
-Print(L)
+Median2(L)
+
